@@ -45,6 +45,12 @@ passport.use('login', new Strategy({
 
     const token = generateToken(user._id, user.role, user.email)
 
+    req.logIn(user, {
+        session: false
+    }, (err) => {
+        done(null, err)
+    })
+
     const userData = {
         token,
         user
@@ -103,6 +109,12 @@ passport.use("register", new Strategy({
             message: "User does not exists"
         })
     }
+
+    req.logIn(user, {
+        session: false
+    }, (err) => {
+        done(null, err)
+    })
 
     const token = generateToken(user._id, user.role, user.email)
 

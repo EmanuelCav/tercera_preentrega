@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const ticketSchema = new Schema({
 
     code: {
-        type: string,
+        type: String,
         required: true,
         unique: true,
         trim: true

@@ -22,14 +22,16 @@ const login = passport.authenticate('login', {
     failureRedirect: '/login',
     successRedirect: '/products',
     successFlash: true,
-    failureFlash: true
+    failureFlash: true,
+    session: false
 })
 
 const register = passport.authenticate('register', {
     failureRedirect: '/register',
     successRedirect: '/products',
     successFlash: true,
-    failureFlash: true
+    failureFlash: true,
+    session: false
 })
 
 module.exports = {

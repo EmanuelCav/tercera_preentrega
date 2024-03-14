@@ -33,6 +33,6 @@ const getAllMessages = async (req, res) => {
 }
 
 module.exports = {
-    getAllMessages,
-    createMessages
+    createMessages,
+    getAllMessages
 }

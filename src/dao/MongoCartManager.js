@@ -3,7 +3,7 @@ const ProductCart = require('../model/productCart');
 const Product = require('../model/product');
 const Ticket = require('../model/ticket');
 
-const ProductManager = require('../mongo/MongoProductManager')
+const ProductManager = require('./MongoProductManager')
 
 const productManager = new ProductManager()
 

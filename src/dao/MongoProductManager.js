@@ -42,7 +42,7 @@ class ProductDAO {
 
     async updateProduct(id, product) {
 
-        const product = await Product.findById(id)
+        const productUpdated = await Product.findById(id)
 
         if (!product) {
             return
@@ -52,7 +52,7 @@ class ProductDAO {
             new: true
         })
 
-        return result
+        return productUpdated
 
     }
 

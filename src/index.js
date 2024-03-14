@@ -5,6 +5,7 @@ const { engine } = require('express-handlebars')
 const flash = require('connect-flash');
 const passport = require('passport');
 const { Server } = require('socket.io');
+const http = require('http');
 require('dotenv').config()
 
 const MessageDAO = require('./dao/MongoMessageManager');

@@ -5,7 +5,7 @@ const { ObjectId } = Types
 const messageSchema = new Schema({
 
     message: {
-        type: string,
+        type: String,
         required: true,
         trim: true
     },
