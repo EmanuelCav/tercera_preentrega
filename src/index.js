@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars')
-const flash = require('connect-flash');
 const passport = require('passport');
 const { Server } = require('socket.io');
 const http = require('http');
@@ -23,14 +22,11 @@ app.use(morgan('dev'))
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: false, limit: '10mb' }))
 app.use(passport.initialize())
-app.use(passport.session())
-app.use(flash())
 
-app.use((req, res, next) => {
-    res.locals.error = req.flash("error")
-    res.locals.user = req.user || null
-    next()
-})
+// app.use((req, res, next) => {
+//     res.locals.user = req.user || null
+//     next()
+// })
 
 app.use(require('./routes/users.routes'))
 app.use(require('./routes/products.routes'))

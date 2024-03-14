@@ -4,13 +4,10 @@ const Product = require('../model/product')
 const Cart = require('../model/cart')
 
 const {auth} = require('../middleware/auth');
-const { jwt_key } = require('../config/config');
 
 const router = Router()
 
 router.get('/products', auth, async (req, res) => {
-
-    const welcomeMessage = req.flash("welcome")[0]
 
     const { limit = 10 } = req.query
 
@@ -59,7 +56,6 @@ router.get('/logout', (req, res, next) => {
 
     req.logout(function (err) {
         if (err) return next(err)
-        res.clearCookie(`${jwt_key}`)
         res.redirect('/login');
     });
 

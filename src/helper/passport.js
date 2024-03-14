@@ -68,19 +68,25 @@ passport.use("register", new Strategy({
     passReqToCallback: true
 }, async (req, email, password, done) => {
 
-    if (!email || !password) {
+    if (!req.body.email || !req.body.password || !req.body.firstname || !req.body.lastname || !req.body.phone || !req.body.confirm) {
         return done(null, false, {
             message: "There are empty fields"
         })
     }
 
-    if (password.length < 6) {
+    if (req.body.password.length < 6) {
         return done(null, false, {
             message: "The password must have at least 6 charactes"
         })
     }
 
-    const userExists = await User.findOne({ email })
+    if(req.body.confirm !== req.body.password) {
+        return done(null, false, {
+            message: "Passwords do not match"
+        })
+    }
+
+    const userExists = await User.findOne({ email: req.body.email })
 
     if (userExists) {
         return done(null, false, {
@@ -89,15 +95,15 @@ passport.use("register", new Strategy({
     }
 
     const salt = await bcryptjs.genSalt(8)
-    const hash = await bcryptjs.hash(password, salt)
+    const hash = await bcryptjs.hash(req.body.password, salt)
 
     const newUser = new User(new RegisterDTO({
-        firstname,
-        lastname,
-        email,
-        phone,
+        first_name: req.body.firstname,
+        last_name: req.body.lastname,
+        email: req.body.email,
+        phone: req.body.phone,
         password: hash,
-        role: role && role
+        role: req.body.role && req.body.role
     }))
 
     const userSaved = await newUser.save()
@@ -118,12 +124,10 @@ passport.use("register", new Strategy({
 
     const token = generateToken(user._id, user.role, user.email)
 
-    req.flash("welcome", `¡Welcome ${user.firstname} ${user.lastname} with email ${user.email}! Enjoy our products`)
-
-    await infoEmail(email)
+    await infoEmail(req.body.email)
 
     await client.messages.create({
-        to: phone,
+        to: req.body.phone,
         from: phone_number,
         body: "Welcome to eCommerce!"
     })

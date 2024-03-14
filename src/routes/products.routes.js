@@ -7,8 +7,8 @@ const { auth, admin } = require('../middleware/auth');
 
 const router = Router()
 
-router.get('/api/products', products)
-router.get('/api/products/:pid', productGet)
+router.get('/api/products', auth, products)
+router.get('/api/products/:pid', auth, productGet)
 
 router.post('/api/products', [auth, admin], upload.array("files", 10), productCreate)
 

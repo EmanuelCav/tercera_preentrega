@@ -1,8 +1,8 @@
 class RegisterDTO {
 
     constructor(data) {
-        this.firstname = data.firstname
-        this.lastname = data.lastname
+        this.first_name = data.first_name
+        this.last_name = data.last_name
         this.email = data.email
         this.phone = data.phone
         this.password = data.password
@@ -13,8 +13,8 @@ class RegisterDTO {
 
 class UserDTO {
     constructor(data) {
-        this.firstname = data.firstname
-        this.lastname = data.lastname
+        this.first_name = data.first_name
+        this.last_name = data.last_name
     }
 }
 
