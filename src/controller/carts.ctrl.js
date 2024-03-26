@@ -6,7 +6,7 @@ const createCart = async (req, res) => {
 
     try {
 
-        const result = await CartManager.createCart(req.user._id)
+        const result = await CartManager.createCart(req.user.id)
 
         return res.status(200).json({
             message: "Cart added successfully",
@@ -95,7 +95,7 @@ const removeAllProducts = async (req, res) => {
 
     const { cid } = req.params
 
-    const result = CartManager.removeAllProductsFromCart(cid)
+    const result = await CartManager.removeAllProductsFromCart(cid)
 
     if (!result) {
         return res.status(400).json({ message: "Cart does not exists" })
@@ -111,7 +111,7 @@ const purchaseCart = async (req, res) => {
 
     const { cid } = req.params
 
-    const result = CartManager.purchaseCartProducts(cid)
+    const result = await CartManager.purchaseCartProducts(cid)
 
     if(!result) {
         return res.status(400).json({ message: "Error to generate ticket" })

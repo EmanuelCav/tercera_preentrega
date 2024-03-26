@@ -213,6 +213,7 @@ class CartDAO {
         let productsFail = []
 
         for (let i = 0; i < cart.products.length; i++) {
+            
             if (cart.products[i].product.stock > 0) {
                 await Product.findByIdAndUpdate(cart.products[i].product._id, {
                     stock: cart.products[i].product.stock - cart.products[i].quantity
@@ -231,7 +232,7 @@ class CartDAO {
             }
         }
 
-        if(productsFail.length > 0) {
+        if (productsFail.length > 0) {
             return productsFail
         }
 
@@ -239,7 +240,7 @@ class CartDAO {
 
         const newTicket = new Ticket({
             code: `${tickets.length + 1}`,
-            purchase_datetime: new Date().now(),
+            purchase_datetime: new Date(),
             amount: cart.products.length,
             purchaser: cart.user.email
         })

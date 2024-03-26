@@ -19,7 +19,7 @@ passport.use('login', new Strategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
-}, async (email, password, done) => {
+}, async (req, email, password, done) => {
 
     if (!email || !password) {
         return done(null, false, {
@@ -45,16 +45,12 @@ passport.use('login', new Strategy({
 
     const token = generateToken(user._id, user.role, user.email)
 
-    req.logIn(user, {
-        session: false
-    }, (err) => {
-        done(null, err)
-    })
-
     const userData = {
         token,
         user
     }
+
+    console.log(token);
 
     return done(null, userData, {
         message: "¡Welcome!"

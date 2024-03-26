@@ -19,10 +19,7 @@ const users = async (req, res) => {
 }
 
 const login = passport.authenticate('login', {
-    failureRedirect: '/login',
-    successRedirect: '/products',
-    successFlash: true,
-    failureFlash: true,
+    successRedirect: '/',
     session: false
 })
 

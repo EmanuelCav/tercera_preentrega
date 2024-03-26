@@ -8,7 +8,7 @@ const createMessages = async (req, res) => {
 
     try {
 
-        const showMessage = await messageDAO.createMessage(req.user._id, message)
+        const showMessage = await messageDAO.createMessage(req.user.id, message)
 
         return res.status(200).json(showMessage)
 

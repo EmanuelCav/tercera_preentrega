@@ -16,6 +16,6 @@ router.delete('/api/carts/:cid', auth, removeAllProducts)
 
 router.put('/api/carts/:cid/products/:pid', auth, quantityProductCart)
 
-router.patch('/:cid/purchase', auth, purchaseCart)
+router.patch('/api/carts/:cid/purchase', auth, purchaseCart)
 
 module.exports = router
